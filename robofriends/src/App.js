@@ -22,7 +22,7 @@ class App extends Component{
     })
     return(
       <div className="tc">
-        <h1 className='f1'> RoboFriends </h1>
+        <h1 className='f1 heading'> RoboFriends </h1>
         <Search_Bar textUpdated={this.textUpdated}/>
         <Scroll_View>
         <Card_list robots={final}/>
