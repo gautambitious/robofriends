@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Card_list from "./Card_list";
+import { robots } from "./robots"
+import Search_Bar from "./Search_Bar";
+import Scroll_View from "./Scroll_View";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://thegautamjain.me"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component{
+  constructor(){
+  super();
+  this.state= {
+    robots: robots,
+    searchText: ''
+  }}
+
+  textUpdated= (event) => {
+    this.setState({searchText: event.target.value});
+  }
+
+  render(){
+    const final=this.state.robots.filter(robot => {
+      return robot.name.toLowerCase().includes(this.state.searchText.toLowerCase())
+    })
+    return(
+      <div className="tc">
+        <h1 className='f1'> RoboFriends </h1>
+        <Search_Bar textUpdated={this.textUpdated}/>
+        <Scroll_View>
+        <Card_list robots={final}/>
+        </Scroll_View>
+      </div>
+    );
+  }
 }
 
 export default App;
